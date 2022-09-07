@@ -9,15 +9,13 @@ objektum üzenet szövege ebben az esetben:
 'Error: Something went wrong with sorting words.'
  */
 
-const sortStrings = ([...string]) => {
-  const question = (string.every((item) => typeof item === 'string'));
-  return new Promise((resolve, reject) => {
-    if (question) { resolve(string.sort()); } else { reject('Error: Not all items in the array are strings!'); }
-  }).then(
-    (value) => value,
-    (err) => err,
-  )
-    .catch('Error: Something went wrong with sorting words.');
-};
+const sortStrings = (string) => new Promise((resolve, reject) => {
+  try {
+    // eslint-disable-next-line no-unused-expressions
+    (string.every((item) => typeof item === 'string'))
+      ? resolve(string.sort())
+      : reject(new Error('Error: Not all items in the array are strings!'));
+  } catch (error) { reject(new Error('Error: Something went wrong with sorting words!')); }
+});
 
 export default sortStrings;

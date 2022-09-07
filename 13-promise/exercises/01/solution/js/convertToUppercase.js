@@ -6,15 +6,9 @@ Amennyiben a tömb minden eleme string, és sikeresen nagybetűssé alakítható
 Ellenkező esetben a Promise rejected lesz, a visszatérési érték a következő string:
 'Error: Not all items in the array are strings!' */
 
-const convertToUppercase = ([...string]) => {
-  const question = (string.every((item) => typeof item === 'string'));
-  return new Promise((resolve, reject) => {
-    if (question) { resolve(string.map((f) => f.toUpperCase())); } else { reject('Error: Not all items in the array are strings!'); }
-  }).then(
-    (value) => value,
-    (err) => err,
-  );
-};
+const convertToUppercase = (string = []) => new Promise((resolve, reject) => {
+  if ((string.every((item) => typeof item === 'string'))) { resolve(string.map((f) => f.toUpperCase())); } else { reject(new Error('Error: Not all items in the array are strings!')); }
+});
 
 // console.log(convertToUppercase(['qeqwe', 'weqwe', 'erew', 'erwe', 11]));
 export default convertToUppercase;
